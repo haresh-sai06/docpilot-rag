@@ -10,7 +10,7 @@ testset:          ## synthetic 100-question set (needs an LLM)
 eval-retrieval:   ## BM25 / dense / hybrid x rerank ablation on all 100 questions
 	$(PY) eval/run_retrieval_eval.py
 eval-generation:  ## faithfulness / relevance / latency / tokens, rerank on vs off, cache cold vs warm
-	$(PY) eval/run_generation_eval.py --n 25
+	PY=$(PY) bash scripts/run_generation_eval.sh
 serve:
 	uvicorn docpilot.api:app --port 8000
 ui:

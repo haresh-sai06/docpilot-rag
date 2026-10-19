@@ -8,7 +8,9 @@ Generation metrics (no LLM judge needed, so they are cheap and reproducible):
   answer_relevance  - cosine similarity between question and answer embeddings (bge-small)
   context_recall    - gold chunk is among the passages given to the LLM
 
-python eval/run_generation_eval.py --n 30
+python eval/run_generation_eval.py --n 25 --phase generate --configs norerank
+  python eval/run_generation_eval.py --n 25 --phase generate --configs rerank
+  python eval/run_generation_eval.py --n 25 --phase score
 """
 from __future__ import annotations
 
@@ -77,46 +79,71 @@ def summarise(rows):
             "avg_completion_tokens": round(float(np.mean(ct)), 1) if ct else 0}
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--n", type=int, default=30)
-    ap.add_argument("--seed", type=int, default=13)
-    a = ap.parse_args()
-    s = get_settings()
-    tests = load_testset()
-    tests = random.Random(a.seed).sample(tests, min(a.n, len(tests)))
+CONFIGS = {"norerank": ("Hybrid, no rerank", False), "rerank": ("Hybrid + rerank", True)}
+
+
+def generate(s, a, tests):
+    """Phase 1: run the agent (cache cold, then identical repeat traffic) and save raw outputs per config."""
+    from docpilot.llm import LLM
+
     chunks = load_chunks(s.data_dir, s.corpus_version)
     cache = KVCache(s.cache_path, enabled=True)
     retriever = HybridRetriever(chunks, Embedder(s.embed_model, cache), Reranker(s.rerank_model))
-    scorer = Scorer(retriever.embedder)
-    from docpilot.llm import LLM
-
     LLM(s).chat("You are terse.", "Say OK.", max_tokens=4)  # warm-up: load the model before timing
     retriever.search("warm up the reranker", k=4, rerank=True)
-    results, raw = [], {}
-    for name, rerank in [("Hybrid, no rerank", False), ("Hybrid + rerank", True)]:
+    for slug in a.configs:
+        name, rerank = CONFIGS[slug]
         cache.clear()
         agent = build(s, cache_enabled=True, rerank=rerank, retriever=retriever)
         retriever.embedder.cache = agent.cache
         cold = run_pass(agent, tests)
         warm = run_pass(agent, tests)  # identical repeat traffic -> response cache hits
-        faith = [scorer.faithfulness(r["answer"], r["contexts"]) for r in cold]
+        keep = ("id", "question", "gold", "answer", "citations", "latency_ms", "usage", "timings", "cached")
+        raw = {"config": name, "cold": [{k: r[k] for k in keep} for r in cold], "warm": [{k: r[k] for k in keep} for r in warm]}
+        (ROOT / "reports" / f"gen_raw_{slug}.json").write_text(json.dumps(raw, indent=2))
+        print("saved", slug, summarise(cold), flush=True)
+
+
+def score(s, a, tests):
+    """Phase 2: score saved answers (separate process keeps peak memory low). Contexts = the cited chunks,
+    i.e. exactly the passages the LLM saw (truncated to 1,000 chars as in the prompt)."""
+    chunks = {c.id: c for c in load_chunks(s.data_dir, s.corpus_version)}
+    scorer = Scorer(Embedder(s.embed_model, KVCache(s.cache_path, enabled=False)))
+    results, answers = [], {}
+    for slug in CONFIGS:
+        f = ROOT / "reports" / f"gen_raw_{slug}.json"
+        if not f.exists():
+            continue
+        raw = json.loads(f.read_text())
+        cold, warm = raw["cold"], raw["warm"]
+        faith = [scorer.faithfulness(r["answer"], [chunks[c["chunk_id"]].text[:1000] for c in r["citations"]]) for r in cold]
         rel = [scorer.relevance(r["question"], r["answer"]) for r in cold]
         ctx = [r["gold"] in [c["chunk_id"] for c in r["citations"]] for r in cold]
-        f_valid = [f for f in faith if f is not None]
-        results.append({"config": name, "n": len(tests), "faithfulness": round(float(np.mean(f_valid)), 3),
+        f_valid = [x for x in faith if x is not None]
+        results.append({"config": raw["config"], "n": len(cold), "faithfulness": round(float(np.mean(f_valid)), 3),
                         "answer_relevance": round(float(np.mean(rel)), 3), "context_recall": round(float(np.mean(ctx)), 3),
                         "cache_off": summarise(cold), "cache_on_repeat": summarise(warm)})
-        raw[name] = [{k: r[k] for k in ("id", "question", "answer", "citations", "latency_ms", "usage", "timings")} for r in cold]
+        answers[raw["config"]] = cold
         print(results[-1], flush=True)
-        save(s, a, tests, results, raw)  # write after every config so a crash loses nothing
-
-
-def save(s, a, tests, results, raw):
     meta = {"llm_provider": s.llm_provider, "llm_model": s.llm_model, "embed_model": s.embed_model, "nli_model": NLI_MODEL,
             "subset_seed": a.seed, "subset_ids": [t["id"] for t in tests], "results": results}
     (ROOT / "reports" / "generation_eval.json").write_text(json.dumps(meta, indent=2))
-    (ROOT / "reports" / "generation_answers.json").write_text(json.dumps(raw, indent=2))
+    (ROOT / "reports" / "generation_answers.json").write_text(json.dumps(answers, indent=2))
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--n", type=int, default=25)
+    ap.add_argument("--seed", type=int, default=13)
+    ap.add_argument("--phase", choices=["generate", "score", "all"], default="all")
+    ap.add_argument("--configs", nargs="+", choices=list(CONFIGS), default=list(CONFIGS))
+    a = ap.parse_args()
+    s = get_settings()
+    tests = random.Random(a.seed).sample(load_testset(), a.n)
+    if a.phase in ("generate", "all"):
+        generate(s, a, tests)
+    if a.phase in ("score", "all"):
+        score(s, a, tests)
 
 
 if __name__ == "__main__":
