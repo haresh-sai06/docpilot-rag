@@ -1,0 +1,33 @@
+# gcloud run services replace deploy/gcp/service.yaml --region asia-south1
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: docpilot
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: "3"
+    spec:
+      containerConcurrency: 8
+      containers:
+        - image: asia-south1-docker.pkg.dev/PROJECT_ID/docpilot/docpilot:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DOCPILOT_LLM_PROVIDER
+              value: openai
+            - name: DOCPILOT_LLM_MODEL
+              value: gpt-4o-mini
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: docpilot-openai-key
+                  key: latest
+          resources:
+            limits:
+              cpu: "2"
+              memory: 2Gi
+          startupProbe:
+            httpGet:
+              path: /health

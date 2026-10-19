@@ -1,0 +1,10 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+requests>=2.31
+numpy>=1.26
+qdrant-client>=1.10
+fastembed>=0.4
+langgraph>=0.2
+langchain-core>=0.3
+langchain-openai>=0.2

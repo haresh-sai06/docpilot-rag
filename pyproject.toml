@@ -1,0 +1,21 @@
+[project]
+name = "docpilot-rag"
+version = "0.1.0"
+description = "Hybrid-retrieval RAG + LangGraph agent over the FastAPI docs, with retrieval/generation evals and latency/cost benchmarks"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+[tool.ruff]
+line-length = 140
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "B"]
+ignore = ["E501", "B905", "B008"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["docpilot", "common", "conftest"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "tests"]

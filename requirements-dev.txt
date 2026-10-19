@@ -1,0 +1,5 @@
+-r requirements.txt
+sentence-transformers>=3.0   # NLI model for the faithfulness metric (eval only)
+pytest>=8.0
+httpx>=0.27
+ruff>=0.4
