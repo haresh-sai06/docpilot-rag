@@ -1,0 +1,59 @@
+{
+  "llm_provider": "ollama",
+  "llm_model": "qwen2.5-1.5b-local",
+  "embed_model": "BAAI/bge-small-en-v1.5",
+  "nli_model": "cross-encoder/nli-deberta-v3-xsmall",
+  "subset_seed": 13,
+  "subset_ids": [
+    34,
+    38,
+    88,
+    98,
+    24,
+    84,
+    30,
+    86,
+    19,
+    29,
+    83,
+    96,
+    17,
+    10,
+    69,
+    28,
+    99,
+    4,
+    56,
+    97,
+    78,
+    2,
+    36,
+    92,
+    11
+  ],
+  "results": [
+    {
+      "config": "Hybrid, no rerank",
+      "n": 25,
+      "faithfulness": 0.459,
+      "answer_relevance": 0.905,
+      "context_recall": 0.76,
+      "cache_off": {
+        "p50_ms": 7528.9,
+        "p95_ms": 11308.5,
+        "mean_ms": 7882.9,
+        "llm_calls": 25,
+        "avg_prompt_tokens": 750.9,
+        "avg_completion_tokens": 66.5
+      },
+      "cache_on_repeat": {
+        "p50_ms": 0.0,
+        "p95_ms": 0.1,
+        "mean_ms": 0.1,
+        "llm_calls": 0,
+        "avg_prompt_tokens": 0,
+        "avg_completion_tokens": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,1079 @@
+{
+  "Hybrid, no rerank": [
+    {
+      "id": 34,
+      "question": "How does FastAPI convert standard dataclasses to Pydantic's own flavor of dataclasses?",
+      "answer": "FastAPI converts standard dataclasses to Pydantic's own flavor of dataclasses by leveraging Pydantic's internal support for dataclasses. This allows FastAPI to automatically convert dataclasses to Pydantic models, enabling features such as data validation, serialization, and documentation.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "advanced/dataclasses.md",
+          "section": "Using Dataclasses",
+          "chunk_id": "advanced/dataclasses.md#0"
+        },
+        {
+          "n": 2,
+          "page": "advanced/dataclasses.md",
+          "section": "Dataclasses in Nested Data Structures",
+          "chunk_id": "advanced/dataclasses.md#2"
+        },
+        {
+          "n": 3,
+          "page": "advanced/dataclasses.md",
+          "section": "Dataclasses in `response_model`",
+          "chunk_id": "advanced/dataclasses.md#1"
+        },
+        {
+          "n": 4,
+          "page": "advanced/dataclasses.md",
+          "section": "Dataclasses in Nested Data Structures",
+          "chunk_id": "advanced/dataclasses.md#3"
+        }
+      ],
+      "latency_ms": 7065.096368998638,
+      "usage": {
+        "prompt_tokens": 878,
+        "completion_tokens": 56
+      },
+      "timings": {
+        "retrieval_ms": 66.19294900156092,
+        "retrieve_ms": 66.10314499994274,
+        "fuse_ms": 0.07673099753446877,
+        "rerank_ms": 0.00011700103641487658,
+        "generate_ms": 6984.32527100158
+      }
+    },
+    {
+      "id": 38,
+      "question": "What specific advantages did you find in using Pydantic for your project?",
+      "answer": "I contributed to Pydantic to make it fully compliant with JSON Schema, support different ways to define constraint declarations, and improve editor support (type checks, autocompletion) based on tests in various editors.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "history-design-future.md",
+          "section": "Requirements",
+          "chunk_id": "history-design-future.md#4"
+        },
+        {
+          "n": 2,
+          "page": "virtual-environments.md",
+          "section": "What Does Activating a Virtual Environment Mean",
+          "chunk_id": "virtual-environments.md#22"
+        },
+        {
+          "n": 3,
+          "page": "how-to/graphql.md",
+          "section": "GraphQL",
+          "chunk_id": "how-to/graphql.md#0"
+        },
+        {
+          "n": 4,
+          "page": "features.md",
+          "section": "Pydantic features",
+          "chunk_id": "features.md#12"
+        }
+      ],
+      "latency_ms": 6557.47070399957,
+      "usage": {
+        "prompt_tokens": 698,
+        "completion_tokens": 43
+      },
+      "timings": {
+        "retrieval_ms": 83.85732199894846,
+        "retrieve_ms": 83.60859599997639,
+        "fuse_ms": 0.21771100000478327,
+        "rerank_ms": 0.00018199716578237712,
+        "generate_ms": 6463.75689100023
+      }
+    },
+    {
+      "id": 88,
+      "question": "How can I disable automatic conversion of underscores to hyphens in the `Header` parameter?",
+      "answer": "To disable automatic conversion of underscores to hyphens in the `Header` parameter, set the parameter `convert_underscores` of `Header` to `False`.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "tutorial/header-params.md",
+          "section": "Automatic conversion",
+          "chunk_id": "tutorial/header-params.md#3"
+        },
+        {
+          "n": 2,
+          "page": "tutorial/header-params.md",
+          "section": "Automatic conversion",
+          "chunk_id": "tutorial/header-params.md#4"
+        },
+        {
+          "n": 3,
+          "page": "tutorial/header-param-models.md",
+          "section": "Forbid Extra Headers",
+          "chunk_id": "tutorial/header-param-models.md#3"
+        },
+        {
+          "n": 4,
+          "page": "tutorial/header-params.md",
+          "section": "Recap",
+          "chunk_id": "tutorial/header-params.md#6"
+        }
+      ],
+      "latency_ms": 4584.4621830001415,
+      "usage": {
+        "prompt_tokens": 570,
+        "completion_tokens": 35
+      },
+      "timings": {
+        "retrieval_ms": 74.84244599982048,
+        "retrieve_ms": 74.64951300062239,
+        "fuse_ms": 0.16787600179668516,
+        "rerank_ms": 0.0001410007826052606,
+        "generate_ms": 4503.4833470017475
+      }
+    },
+    {
+      "id": 98,
+      "question": "How can a developer override a dependency in FastAPI to use a custom mock user for tests?",
+      "answer": "To override a dependency in FastAPI for testing, a developer can use the `app.dependency_overrides` attribute. This attribute is a simple `dict` where the original dependency (a function) is the key, and the dependency override (another function) is the value. FastAPI will then call the override instead of the original dependency during tests.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "advanced/testing-dependencies.md",
+          "section": "Use cases: external service",
+          "chunk_id": "advanced/testing-dependencies.md#1"
+        },
+        {
+          "n": 2,
+          "page": "advanced/testing-dependencies.md",
+          "section": "Use the `app.dependency_overrides` attribute",
+          "chunk_id": "advanced/testing-dependencies.md#2"
+        },
+        {
+          "n": 3,
+          "page": "advanced/testing-dependencies.md",
+          "section": "Use the `app.dependency_overrides` attribute",
+          "chunk_id": "advanced/testing-dependencies.md#3"
+        },
+        {
+          "n": 4,
+          "page": "advanced/testing-dependencies.md",
+          "section": "Overriding dependencies during testing",
+          "chunk_id": "advanced/testing-dependencies.md#0"
+        }
+      ],
+      "latency_ms": 7838.052904000506,
+      "usage": {
+        "prompt_tokens": 701,
+        "completion_tokens": 72
+      },
+      "timings": {
+        "retrieval_ms": 93.1275450020621,
+        "retrieve_ms": 93.03909500158625,
+        "fuse_ms": 0.07191899931058288,
+        "rerank_ms": 0.00015100158634595573,
+        "generate_ms": 7738.765417998366
+      }
+    },
+    {
+      "id": 24,
+      "question": "What is the difference between using `Union` from `typing` and the new syntax in Python 3.10 for declaring a variable that could be either an `int` or a `str`?",
+      "answer": "In Python 3.10, you can use the `Union` type from `typing` or the new syntax with vertical bars (`|`) to declare a variable that could be either an `int` or a `str`. The new syntax is more concise and allows for type annotations in function arguments. However, the `Union` type is still available in Python 3.10 and above, and it's recommended to use it for clarity and to avoid potential type errors.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "python-types.md",
+          "section": "Generic types with type parameters",
+          "chunk_id": "python-types.md#11"
+        },
+        {
+          "n": 2,
+          "page": "python-types.md",
+          "section": "Generic types with type parameters",
+          "chunk_id": "python-types.md#10"
+        },
+        {
+          "n": 3,
+          "page": "tutorial/extra-models.md",
+          "section": "`Union` in Python 3.10",
+          "chunk_id": "tutorial/extra-models.md#7"
+        },
+        {
+          "n": 4,
+          "page": "python-types.md",
+          "section": "Generic types with type parameters",
+          "chunk_id": "python-types.md#9"
+        }
+      ],
+      "latency_ms": 10495.754872001271,
+      "usage": {
+        "prompt_tokens": 1104,
+        "completion_tokens": 99
+      },
+      "timings": {
+        "retrieval_ms": 74.9416899998323,
+        "retrieve_ms": 74.86570200126152,
+        "fuse_ms": 0.06151599882286973,
+        "rerank_ms": 0.0001360021997243166,
+        "generate_ms": 10415.238364003017
+      }
+    },
+    {
+      "id": 84,
+      "question": "What HTTP status codes are used for \"Information\" responses and why are they rarely used directly?",
+      "answer": "HTTP status codes above 100 are for \"Information\" responses, and they are rarely used directly because they cannot have a body. The most commonly used status codes are 200 and above, which are for \"Successful\" responses. Specifically, 200 is the default status code, indicating everything was \"OK,\" while 201 indicates \"Created.\"",
+      "citations": [
+        {
+          "n": 1,
+          "page": "tutorial/response-status-code.md",
+          "section": "About HTTP status codes",
+          "chunk_id": "tutorial/response-status-code.md#2"
+        },
+        {
+          "n": 2,
+          "page": "tutorial/response-status-code.md",
+          "section": "About HTTP status codes",
+          "chunk_id": "tutorial/response-status-code.md#1"
+        },
+        {
+          "n": 3,
+          "page": "reference/status.md",
+          "section": "Status Codes",
+          "chunk_id": "reference/status.md#0"
+        },
+        {
+          "n": 4,
+          "page": "advanced/additional-status-codes.md",
+          "section": "Additional status codes",
+          "chunk_id": "advanced/additional-status-codes.md#2"
+        }
+      ],
+      "latency_ms": 6779.029557001195,
+      "usage": {
+        "prompt_tokens": 706,
+        "completion_tokens": 78
+      },
+      "timings": {
+        "retrieval_ms": 55.09297100070398,
+        "retrieve_ms": 55.01720699976431,
+        "fuse_ms": 0.06114300049375743,
+        "rerank_ms": 0.00012499731383286417,
+        "generate_ms": 6720.000319000974
+      }
+    },
+    {
+      "id": 30,
+      "question": "What is the recommended Dockerfile path for a single-file FastAPI application located at `main.py`?",
+      "answer": "The recommended Dockerfile path for a single-file FastAPI application located at `main.py` is to copy the `main.py` file directly to the `/code` directory within the Dockerfile.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "deployment/docker.md",
+          "section": "Build a Docker Image with a Single-File FastAPI",
+          "chunk_id": "deployment/docker.md#18"
+        },
+        {
+          "n": 2,
+          "page": "deployment/docker.md",
+          "section": "(2)!",
+          "chunk_id": "deployment/docker.md#19"
+        },
+        {
+          "n": 3,
+          "page": "deployment/docker.md",
+          "section": "\u2705 Do this",
+          "chunk_id": "deployment/docker.md#11"
+        },
+        {
+          "n": 4,
+          "page": "deployment/docker.md",
+          "section": "Dockerfile",
+          "chunk_id": "deployment/docker.md#9"
+        }
+      ],
+      "latency_ms": 3485.443995999958,
+      "usage": {
+        "prompt_tokens": 454,
+        "completion_tokens": 40
+      },
+      "timings": {
+        "retrieval_ms": 63.56804499955615,
+        "retrieve_ms": 63.473140999121824,
+        "fuse_ms": 0.07737800115137361,
+        "rerank_ms": 0.00014699980965815485,
+        "generate_ms": 3417.881211000349
+      }
+    },
+    {
+      "id": 86,
+      "question": "How can I access the client's IP address/host directly within a path operation function using the `Request` object?",
+      "answer": "To access the client's IP address/host directly within a path operation function using the `Request` object, you need to declare a parameter with the type `Request` in your path operation function. This allows you to access the raw `Request` object without any validation or conversion. You can import the `Request` class directly from `fastapi` to do this.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "advanced/using-request-directly.md",
+          "section": "Use the `Request` object directly",
+          "chunk_id": "advanced/using-request-directly.md#2"
+        },
+        {
+          "n": 2,
+          "page": "reference/request.md",
+          "section": "`Request` class",
+          "chunk_id": "reference/request.md#0"
+        },
+        {
+          "n": 3,
+          "page": "advanced/using-request-directly.md",
+          "section": "Using the Request Directly",
+          "chunk_id": "advanced/using-request-directly.md#0"
+        },
+        {
+          "n": 4,
+          "page": "tutorial/security/get-current-user.md",
+          "section": "Recap",
+          "chunk_id": "tutorial/security/get-current-user.md#7"
+        }
+      ],
+      "latency_ms": 5635.72497199857,
+      "usage": {
+        "prompt_tokens": 534,
+        "completion_tokens": 75
+      },
+      "timings": {
+        "retrieval_ms": 74.33340000352473,
+        "retrieve_ms": 74.25864499964518,
+        "fuse_ms": 0.06110899994382635,
+        "rerank_ms": 8.300048648379743e-05,
+        "generate_ms": 5555.14840899923
+      }
+    },
+    {
+      "id": 19,
+      "question": "What is the difference between using OAuth2 with Password and hashing and Bearer with JWT tokens in FastAPI?",
+      "answer": "OAuth2 with Password (and hashing) and Bearer with JWT tokens are both used for securing APIs, but they differ in how they handle authentication and authorization. OAuth2 with Password (and hashing) uses a password-based authentication method, while Bearer with JWT tokens uses a JSON Web Token (JWT) for authentication. OAuth2 with Password (and hashing) allows for more fine-grained permissions through scopes, while Bearer with JWT tokens are used for a more fine-grained permission system. OAuth2 with scopes is commonly used by big authentication providers like Facebook, Google, GitHub, Microsoft, Twitter, etc. to authorize third-party applications",
+      "citations": [
+        {
+          "n": 1,
+          "page": "tutorial/security/oauth2-jwt.md",
+          "section": "OAuth2 with Password (and hashing), Bearer with JWT tokens",
+          "chunk_id": "tutorial/security/oauth2-jwt.md#0"
+        },
+        {
+          "n": 2,
+          "page": "tutorial/security/oauth2-jwt.md",
+          "section": "Advanced usage with `scopes`",
+          "chunk_id": "tutorial/security/oauth2-jwt.md#14"
+        },
+        {
+          "n": 3,
+          "page": "tutorial/security/oauth2-jwt.md",
+          "section": "Password hashing",
+          "chunk_id": "tutorial/security/oauth2-jwt.md#3"
+        },
+        {
+          "n": 4,
+          "page": "tutorial/security/oauth2-jwt.md",
+          "section": "Recap",
+          "chunk_id": "tutorial/security/oauth2-jwt.md#16"
+        }
+      ],
+      "latency_ms": 8643.999685999006,
+      "usage": {
+        "prompt_tokens": 492,
+        "completion_tokens": 128
+      },
+      "timings": {
+        "retrieval_ms": 62.810482999339,
+        "retrieve_ms": 62.74097400091705,
+        "fuse_ms": 0.0569280018680729,
+        "rerank_ms": 0.00015899786376394331,
+        "generate_ms": 8571.748549002223
+      }
+    },
+    {
+      "id": 29,
+      "question": "What are the key features of FastAPI that make it stand out compared to other Python web frameworks?",
+      "answer": "FastAPI is a modern, high-performance web framework for building APIs with Python based on standard Python type hints. The key features that make it stand out include:\n\n1. **Fast Performance**: FastAPI is highly performant, comparable to NodeJS and Go, thanks to Starlette and Pydantic.\n2. **Fast to Code**: Increases the speed to develop features by about 200% to 300%.\n3. **Fewer Bugs**: Reduces about 40% of human-induced errors.\n4. **Intuitive Editor Support**: Provides editor support for error checks, autocompletion, etc.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "index.md",
+          "section": "FastAPI",
+          "chunk_id": "index.md#0"
+        },
+        {
+          "n": 2,
+          "page": "tutorial/path-params.md",
+          "section": "Recap",
+          "chunk_id": "tutorial/path-params.md#16"
+        },
+        {
+          "n": 3,
+          "page": "alternatives.md",
+          "section": "Intro",
+          "chunk_id": "alternatives.md#1"
+        },
+        {
+          "n": 4,
+          "page": "alternatives.md",
+          "section": "Hug",
+          "chunk_id": "alternatives.md#20"
+        }
+      ],
+      "latency_ms": 10472.650432999217,
+      "usage": {
+        "prompt_tokens": 772,
+        "completion_tokens": 128
+      },
+      "timings": {
+        "retrieval_ms": 134.32819599984214,
+        "retrieve_ms": 134.21630800075945,
+        "fuse_ms": 0.09430099817109294,
+        "rerank_ms": 0.00011399970389902592,
+        "generate_ms": 10331.70046899977
+      }
+    },
+    {
+      "id": 83,
+      "question": "What is the difference between `Field` and `Query`, `Path`, and `Body` in the context of FastAPI?",
+      "answer": "In the context of FastAPI, `Field`, `Query`, `Path`, and `Body` are used to define parameters in API operations. `Field` is used to specify the type of the parameter, while `Query`, `Path`, and `Body` are used to specify how the parameter should be interpreted from the request. `Query` and `Path` are used to interpret the parameter as a query parameter or path parameter, respectively, while `Body` is used to interpret the parameter as a request body. The `Field` parameter is also used to specify the default value of the parameter.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "tutorial/body.md",
+          "section": "Request body + path + query parameters",
+          "chunk_id": "tutorial/body.md#9"
+        },
+        {
+          "n": 2,
+          "page": "tutorial/body-multiple-params.md",
+          "section": "Singular values in body",
+          "chunk_id": "tutorial/body-multiple-params.md#4"
+        },
+        {
+          "n": 3,
+          "page": "tutorial/body-multiple-params.md",
+          "section": "Mix `Path`, `Query` and body parameters",
+          "chunk_id": "tutorial/body-multiple-params.md#1"
+        },
+        {
+          "n": 4,
+          "page": "reference/parameters.md",
+          "section": "Request Parameters",
+          "chunk_id": "reference/parameters.md#0"
+        }
+      ],
+      "latency_ms": 16198.789373000182,
+      "usage": {
+        "prompt_tokens": 1076,
+        "completion_tokens": 123
+      },
+      "timings": {
+        "retrieval_ms": 97.2866560005059,
+        "retrieve_ms": 97.14960400015116,
+        "fuse_ms": 0.12247999984538183,
+        "rerank_ms": 0.0001910011633299291,
+        "generate_ms": 16096.927362003044
+      }
+    },
+    {
+      "id": 96,
+      "question": "What are the two main types of data sent between a client and an API, and how do they differ?",
+      "answer": "When a client sends data to an API, there are two main types of data sent between a client and an API: request bodies and response bodies. A request body is data sent by the client to the API, while a response body is the data the API sends back to the client. The request body is typically used for sending data from the client to the API, while the response body is used for sending data from the API to the client.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "advanced/generate-clients.md",
+          "section": "API Docs",
+          "chunk_id": "advanced/generate-clients.md#4"
+        },
+        {
+          "n": 2,
+          "page": "tutorial/body.md",
+          "section": "Request Body",
+          "chunk_id": "tutorial/body.md#0"
+        },
+        {
+          "n": 3,
+          "page": "alternatives.md",
+          "section": "Marshmallow",
+          "chunk_id": "alternatives.md#9"
+        },
+        {
+          "n": 4,
+          "page": "tutorial/first-steps.md",
+          "section": "OpenAPI",
+          "chunk_id": "tutorial/first-steps.md#6"
+        }
+      ],
+      "latency_ms": 11511.72568399852,
+      "usage": {
+        "prompt_tokens": 869,
+        "completion_tokens": 91
+      },
+      "timings": {
+        "retrieval_ms": 98.55109300042386,
+        "retrieve_ms": 98.42762200059951,
+        "fuse_ms": 0.1113600010285154,
+        "rerank_ms": 0.00016999911167658865,
+        "generate_ms": 11405.06279499823
+      }
+    },
+    {
+      "id": 17,
+      "question": "What is the common case for returning a Response directly in FastAPI?",
+      "answer": "The common case for returning a `Response` directly in FastAPI is when you want to return a custom response that is not JSON-based, such as XML or HTML. This allows for more control over the response format and can be faster than returning a JSON response.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "advanced/response-cookies.md",
+          "section": "Return a `Response` directly",
+          "chunk_id": "advanced/response-cookies.md#1"
+        },
+        {
+          "n": 2,
+          "page": "advanced/custom-response.md",
+          "section": "Use `ORJSONResponse`",
+          "chunk_id": "advanced/custom-response.md#2"
+        },
+        {
+          "n": 3,
+          "page": "advanced/response-directly.md",
+          "section": "Returning a custom `Response`",
+          "chunk_id": "advanced/response-directly.md#3"
+        },
+        {
+          "n": 4,
+          "page": "advanced/custom-response.md",
+          "section": "Custom Response - HTML, Stream, File, others",
+          "chunk_id": "advanced/custom-response.md#0"
+        }
+      ],
+      "latency_ms": 7564.424521999172,
+      "usage": {
+        "prompt_tokens": 832,
+        "completion_tokens": 54
+      },
+      "timings": {
+        "retrieval_ms": 57.785658002103446,
+        "retrieve_ms": 57.71672499759006,
+        "fuse_ms": 0.05917000089539215,
+        "rerank_ms": 9.699942893348634e-05,
+        "generate_ms": 7410.604296001111
+      }
+    },
+    {
+      "id": 10,
+      "question": "What is the purpose of the `Bucket` utility function in the context of interacting with a Couchbase cluster using FastAPI?",
+      "answer": "The `Bucket` utility function in the context of interacting with a Couchbase cluster using FastAPI serves as the main entrypoint for communication with the database. It connects to a Couchbase cluster, sets default timeouts, authenticates in the cluster, retrieves a `Bucket` instance, sets default timeouts for it, and returns it. This function is crucial for establishing a connection and managing operations within the Couchbase environment.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "how-to/nosql-databases-couchbase.md",
+          "section": "Add a function to get a `Bucket`",
+          "chunk_id": "how-to/nosql-databases-couchbase.md#3"
+        },
+        {
+          "n": 2,
+          "page": "how-to/nosql-databases-couchbase.md",
+          "section": "Create the *path operation function*",
+          "chunk_id": "how-to/nosql-databases-couchbase.md#10"
+        },
+        {
+          "n": 3,
+          "page": "async.md",
+          "section": "Other utility functions",
+          "chunk_id": "async.md#30"
+        },
+        {
+          "n": 4,
+          "page": "how-to/nosql-databases-couchbase.md",
+          "section": "~~NoSQL (Distributed / Big Data) Databases with Couchbase~~ (deprecated)",
+          "chunk_id": "how-to/nosql-databases-couchbase.md#0"
+        }
+      ],
+      "latency_ms": 9012.07705699926,
+      "usage": {
+        "prompt_tokens": 792,
+        "completion_tokens": 84
+      },
+      "timings": {
+        "retrieval_ms": 90.53047700217576,
+        "retrieve_ms": 90.42974499971024,
+        "fuse_ms": 0.0862179986143019,
+        "rerank_ms": 0.00010800067684613168,
+        "generate_ms": 8911.351056998683
+      }
+    },
+    {
+      "id": 69,
+      "question": "What is the default behavior of `fastapi dev` regarding auto-reloading and the IP address it listens on?",
+      "answer": "The default behavior of `fastapi dev` is to enable auto-reloading and listen on the IP address `127.0.0.1`, which is the IP for your machine to communicate with itself alone.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "fastapi-cli.md",
+          "section": "`fastapi dev`",
+          "chunk_id": "fastapi-cli.md#3"
+        },
+        {
+          "n": 2,
+          "page": "fastapi-cli.md",
+          "section": "`fastapi run`",
+          "chunk_id": "fastapi-cli.md#4"
+        },
+        {
+          "n": 3,
+          "page": "index.md",
+          "section": "Run it",
+          "chunk_id": "index.md#10"
+        },
+        {
+          "n": 4,
+          "page": "index.md",
+          "section": "Run it",
+          "chunk_id": "index.md#9"
+        }
+      ],
+      "latency_ms": 7396.525047002797,
+      "usage": {
+        "prompt_tokens": 680,
+        "completion_tokens": 46
+      },
+      "timings": {
+        "retrieval_ms": 98.32406300120056,
+        "retrieve_ms": 98.2379460001539,
+        "fuse_ms": 0.0737390000722371,
+        "rerank_ms": 0.00013399767340160906,
+        "generate_ms": 7287.460774998181
+      }
+    },
+    {
+      "id": 28,
+      "question": "What are the default values for the `allow_methods` and `allow_credentials` arguments in the CORS middleware?",
+      "answer": "The default values for the `allow_methods` and `allow_credentials` arguments in the CORS middleware are:\n\n- `allow_methods` defaults to `['GET']`.\n- `allow_credentials` defaults to `False`.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "tutorial/cors.md",
+          "section": "Use `CORSMiddleware`",
+          "chunk_id": "tutorial/cors.md#5"
+        },
+        {
+          "n": 2,
+          "page": "tutorial/cors.md",
+          "section": "Use `CORSMiddleware`",
+          "chunk_id": "tutorial/cors.md#4"
+        },
+        {
+          "n": 3,
+          "page": "tutorial/middleware.md",
+          "section": "Create a middleware",
+          "chunk_id": "tutorial/middleware.md#1"
+        },
+        {
+          "n": 4,
+          "page": "tutorial/cors.md",
+          "section": "CORS preflight requests",
+          "chunk_id": "tutorial/cors.md#6"
+        }
+      ],
+      "latency_ms": 6047.052533001988,
+      "usage": {
+        "prompt_tokens": 837,
+        "completion_tokens": 44
+      },
+      "timings": {
+        "retrieval_ms": 76.89994799875421,
+        "retrieve_ms": 76.8158120008593,
+        "fuse_ms": 0.0743630007491447,
+        "rerank_ms": 0.00016899866750463843,
+        "generate_ms": 5965.498039000522
+      }
+    },
+    {
+      "id": 99,
+      "question": "What are the available methods that can be used with the `APIRouter` class in FastAPI?",
+      "answer": "The available methods that can be used with the `APIRouter` class in FastAPI include `websocket`, `include_router`, `get`, `put`, `post`, `delete`, `options`, `head`, `patch`, `trace`, `on_event`.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "reference/apirouter.md",
+          "section": "`APIRouter` class",
+          "chunk_id": "reference/apirouter.md#0"
+        },
+        {
+          "n": 2,
+          "page": "tutorial/bigger-applications.md",
+          "section": "*Path operations* with `APIRouter`",
+          "chunk_id": "tutorial/bigger-applications.md#6"
+        },
+        {
+          "n": 3,
+          "page": "tutorial/bigger-applications.md",
+          "section": "Import `APIRouter`",
+          "chunk_id": "tutorial/bigger-applications.md#5"
+        },
+        {
+          "n": 4,
+          "page": "tutorial/bigger-applications.md",
+          "section": "Include an `APIRouter` in another",
+          "chunk_id": "tutorial/bigger-applications.md#26"
+        }
+      ],
+      "latency_ms": 4417.691954000475,
+      "usage": {
+        "prompt_tokens": 542,
+        "completion_tokens": 54
+      },
+      "timings": {
+        "retrieval_ms": 50.88995400001295,
+        "retrieve_ms": 50.80224500125041,
+        "fuse_ms": 0.07500199717469513,
+        "rerank_ms": 0.0001490006980020553,
+        "generate_ms": 4363.4422609975445
+      }
+    },
+    {
+      "id": 4,
+      "question": "What is the equivalent way to pass the keys and values of the `second_user_data` dictionary directly as key-value arguments in Pydantic models?",
+      "answer": "The equivalent way to pass the keys and values of the `second_user_data` dictionary directly as key-value arguments in Pydantic models is to use the `**` operator. This allows you to pass the dictionary as keyword arguments, equivalent to `User(id=4, name=\"Mary\", joined=\"2018-11-30\")`.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "features.md",
+          "section": "A Pydantic model",
+          "chunk_id": "features.md#3"
+        },
+        {
+          "n": 2,
+          "page": "tutorial/extra-models.md",
+          "section": "About `**user_in.dict()`",
+          "chunk_id": "tutorial/extra-models.md#2"
+        },
+        {
+          "n": 3,
+          "page": "tutorial/body-nested-models.md",
+          "section": "Bodies of arbitrary `dict`s",
+          "chunk_id": "tutorial/body-nested-models.md#14"
+        },
+        {
+          "n": 4,
+          "page": "tutorial/sql-databases.md",
+          "section": "Create data",
+          "chunk_id": "tutorial/sql-databases.md#20"
+        }
+      ],
+      "latency_ms": 7847.608883999783,
+      "usage": {
+        "prompt_tokens": 1001,
+        "completion_tokens": 74
+      },
+      "timings": {
+        "retrieval_ms": 76.9262770008936,
+        "retrieve_ms": 76.83245799853466,
+        "fuse_ms": 0.08012400212464854,
+        "rerank_ms": 0.00011899828677996993,
+        "generate_ms": 7764.421597999899
+      }
+    },
+    {
+      "id": 56,
+      "question": "What is the equivalent Python import string for running a FastAPI server manually using Uvicorn?",
+      "answer": "The equivalent Python import string for running a FastAPI server manually using Uvicorn is `main:app`.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "deployment/manually.md",
+          "section": "Run the Server Program",
+          "chunk_id": "deployment/manually.md#6"
+        },
+        {
+          "n": 2,
+          "page": "deployment/manually.md",
+          "section": "Use the `fastapi run` Command",
+          "chunk_id": "deployment/manually.md#1"
+        },
+        {
+          "n": 3,
+          "page": "deployment/server-workers.md",
+          "section": "Multiple Workers",
+          "chunk_id": "deployment/server-workers.md#3"
+        },
+        {
+          "n": 4,
+          "page": "deployment/manually.md",
+          "section": "Install the Server Program",
+          "chunk_id": "deployment/manually.md#5"
+        }
+      ],
+      "latency_ms": 5913.161291002325,
+      "usage": {
+        "prompt_tokens": 1035,
+        "completion_tokens": 23
+      },
+      "timings": {
+        "retrieval_ms": 120.36814599923673,
+        "retrieve_ms": 120.25327000083053,
+        "fuse_ms": 0.10091000149259344,
+        "rerank_ms": 0.00011199881555512547,
+        "generate_ms": 5782.866394001758
+      }
+    },
+    {
+      "id": 97,
+      "question": "What is the order in which FastAPI resolves dependencies for a path operation function?",
+      "answer": "The order in which FastAPI resolves dependencies for a path operation function is as follows:\n\n1. **Common Parameters**: These are parameters that are shared across all path operations.\n2. **Specific Path Parameters**: These are parameters that are specific to a particular path operation.\n3. **Dependencies**: These are functions that are called by FastAPI to provide the necessary data for the path operation.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "tutorial/dependencies/index.md",
+          "section": "Simple usage",
+          "chunk_id": "tutorial/dependencies/index.md#12"
+        },
+        {
+          "n": 2,
+          "page": "tutorial/dependencies/dependencies-in-path-operation-decorators.md",
+          "section": "Global Dependencies",
+          "chunk_id": "tutorial/dependencies/dependencies-in-path-operation-decorators.md#6"
+        },
+        {
+          "n": 3,
+          "page": "tutorial/dependencies/index.md",
+          "section": "Declare the dependency, in the \"dependant\"",
+          "chunk_id": "tutorial/dependencies/index.md#7"
+        },
+        {
+          "n": 4,
+          "page": "tutorial/dependencies/index.md",
+          "section": "To `async` or not to `async`",
+          "chunk_id": "tutorial/dependencies/index.md#10"
+        }
+      ],
+      "latency_ms": 9585.896587999741,
+      "usage": {
+        "prompt_tokens": 662,
+        "completion_tokens": 78
+      },
+      "timings": {
+        "retrieval_ms": 71.94630899903132,
+        "retrieve_ms": 71.83552999777021,
+        "fuse_ms": 0.10039800326921977,
+        "rerank_ms": 0.00012899909052066505,
+        "generate_ms": 9505.798485999549
+      }
+    },
+    {
+      "id": 78,
+      "question": "What is the deprecated `GraphQLApp` class from Starlette and how can it be migrated to `starlette-graphene3`?",
+      "answer": "The deprecated `GraphQLApp` class from Starlette was used to integrate with Graphene. To migrate to `starlette-graphene3`, which covers the same use case and has an almost identical interface, you can easily migrate to `starlette-graphene3`.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "how-to/graphql.md",
+          "section": "Older `GraphQLApp` from Starlette",
+          "chunk_id": "how-to/graphql.md#3"
+        },
+        {
+          "n": 2,
+          "page": "how-to/graphql.md",
+          "section": "GraphQL Libraries",
+          "chunk_id": "how-to/graphql.md#1"
+        },
+        {
+          "n": 3,
+          "page": "features.md",
+          "section": "Starlette features",
+          "chunk_id": "features.md#11"
+        },
+        {
+          "n": 4,
+          "page": "alternatives.md",
+          "section": "Starlette",
+          "chunk_id": "alternatives.md#27"
+        }
+      ],
+      "latency_ms": 9074.753783999768,
+      "usage": {
+        "prompt_tokens": 681,
+        "completion_tokens": 54
+      },
+      "timings": {
+        "retrieval_ms": 87.16702400124632,
+        "retrieve_ms": 87.0668259995,
+        "fuse_ms": 0.08792500011622906,
+        "rerank_ms": 0.00011500014807097614,
+        "generate_ms": 8972.623841000313
+      }
+    },
+    {
+      "id": 2,
+      "question": "How can I declare body parameters as optional in FastAPI?",
+      "answer": "You can declare body parameters as optional by setting their default to `None`. This allows the parameter to be optional and will default to `None` if not provided.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "tutorial/body-multiple-params.md",
+          "section": "Mix `Path`, `Query` and body parameters",
+          "chunk_id": "tutorial/body-multiple-params.md#1"
+        },
+        {
+          "n": 2,
+          "page": "tutorial/query-params.md",
+          "section": "Optional parameters",
+          "chunk_id": "tutorial/query-params.md#2"
+        },
+        {
+          "n": 3,
+          "page": "tutorial/body-multiple-params.md",
+          "section": "Recap",
+          "chunk_id": "tutorial/body-multiple-params.md#8"
+        },
+        {
+          "n": 4,
+          "page": "tutorial/body.md",
+          "section": "Request body + path parameters",
+          "chunk_id": "tutorial/body.md#8"
+        }
+      ],
+      "latency_ms": 6943.526459999703,
+      "usage": {
+        "prompt_tokens": 711,
+        "completion_tokens": 34
+      },
+      "timings": {
+        "retrieval_ms": 149.45452699976158,
+        "retrieve_ms": 149.33264200226404,
+        "fuse_ms": 0.09311900066677481,
+        "rerank_ms": 8.999995770864189e-05,
+        "generate_ms": 6775.094352000451
+      }
+    },
+    {
+      "id": 36,
+      "question": "What is the recommended approach for handling dependencies that return a dictionary in FastAPI?",
+      "answer": "The recommended approach for handling dependencies that return a dictionary in FastAPI is to use the `ORJSONResponse` class, which is a subclass of `Response`. This allows you to return large responses more efficiently by avoiding the overhead of JSON serialization.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "tutorial/dependencies/dependencies-with-yield.md",
+          "section": "Dependencies with yield",
+          "chunk_id": "tutorial/dependencies/dependencies-with-yield.md#0"
+        },
+        {
+          "n": 2,
+          "page": "tutorial/dependencies/dependencies-with-yield.md",
+          "section": "Sub-dependencies with `yield`",
+          "chunk_id": "tutorial/dependencies/dependencies-with-yield.md#4"
+        },
+        {
+          "n": 3,
+          "page": "advanced/custom-response.md",
+          "section": "Use `ORJSONResponse`",
+          "chunk_id": "advanced/custom-response.md#2"
+        },
+        {
+          "n": 4,
+          "page": "tutorial/dependencies/sub-dependencies.md",
+          "section": "Using the same dependency multiple times",
+          "chunk_id": "tutorial/dependencies/sub-dependencies.md#4"
+        }
+      ],
+      "latency_ms": 9978.885042000911,
+      "usage": {
+        "prompt_tokens": 776,
+        "completion_tokens": 50
+      },
+      "timings": {
+        "retrieval_ms": 153.13274700019974,
+        "retrieve_ms": 152.94119399914052,
+        "fuse_ms": 0.16762399900471792,
+        "rerank_ms": 0.00020700099412351847,
+        "generate_ms": 9815.604576000624
+      }
+    },
+    {
+      "id": 92,
+      "question": "What is the alternative to `from starlette.responses import Response` or `from starlette.responses import JSONResponse` when using FastAPI?",
+      "answer": "The alternative to `from starlette.responses import Response` or `from starlette.responses import JSONResponse` when using FastAPI is to use `from fastapi.responses import Response` or `from fastapi.responses import JSONResponse`.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "advanced/response-cookies.md",
+          "section": "More info",
+          "chunk_id": "advanced/response-cookies.md#2"
+        },
+        {
+          "n": 2,
+          "page": "advanced/response-directly.md",
+          "section": "Using the `jsonable_encoder` in a `Response`",
+          "chunk_id": "advanced/response-directly.md#2"
+        },
+        {
+          "n": 3,
+          "page": "advanced/custom-response.md",
+          "section": "Available responses",
+          "chunk_id": "advanced/custom-response.md#7"
+        },
+        {
+          "n": 4,
+          "page": "advanced/additional-status-codes.md",
+          "section": "Additional status codes",
+          "chunk_id": "advanced/additional-status-codes.md#2"
+        }
+      ],
+      "latency_ms": 7528.872794999188,
+      "usage": {
+        "prompt_tokens": 651,
+        "completion_tokens": 47
+      },
+      "timings": {
+        "retrieval_ms": 107.54034799902001,
+        "retrieve_ms": 107.45016500004567,
+        "fuse_ms": 0.0799369991000276,
+        "rerank_ms": 0.0001270018401555717,
+        "generate_ms": 7414.907868002047
+      }
+    },
+    {
+      "id": 11,
+      "question": "What does it mean when multiple processes do not share any memory in FastAPI?",
+      "answer": "When multiple processes do not share any memory in FastAPI, each running process has its own things, variables, and memory. This means that if you are consuming a large amount of memory in your code, each process will consume an equivalent amount of memory.",
+      "citations": [
+        {
+          "n": 1,
+          "page": "deployment/concepts.md",
+          "section": "Replication - Processes and Memory",
+          "chunk_id": "deployment/concepts.md#19"
+        },
+        {
+          "n": 2,
+          "page": "deployment/docker.md",
+          "section": "Memory",
+          "chunk_id": "deployment/docker.md#30"
+        },
+        {
+          "n": 3,
+          "page": "deployment/concepts.md",
+          "section": "Memory per Process",
+          "chunk_id": "deployment/concepts.md#22"
+        },
+        {
+          "n": 4,
+          "page": "deployment/docker.md",
+          "section": "(1)!",
+          "chunk_id": "deployment/docker.md#29"
+        }
+      ],
+      "latency_ms": 6493.079189000127,
+      "usage": {
+        "prompt_tokens": 718,
+        "completion_tokens": 52
+      },
+      "timings": {
+        "retrieval_ms": 76.67464500264032,
+        "retrieve_ms": 76.57505699899048,
+        "fuse_ms": 0.08559699926991016,
+        "rerank_ms": 0.0001490006980020553,
+        "generate_ms": 6408.06933299973
+      }
+    }
+  ]
+}
