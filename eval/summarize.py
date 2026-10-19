@@ -25,11 +25,11 @@ def main():
     gen = json.loads((rep / "generation_eval.json").read_text())
     answers = json.loads((rep / "generation_answers.json").read_text())
     out = [f"# Generation eval ({gen['llm_model']} via {gen['llm_provider']}, n={gen['results'][0]['n']} questions, seed {gen['subset_seed']})\n",
-           "| Config | Faithfulness (NLI) | Answer relevance (cos) | Context recall | p50 cache off | p95 cache off | p50 cache on (repeat) | p95 cache on (repeat) | Avg prompt tok | Avg completion tok |",
+           "| Config | Faithfulness (NLI) | Answer relevance (cos) | Context hit rate@4 (gold passage in top-4 context) | p50 cache off | p95 cache off | p50 cache on (repeat) | p95 cache on (repeat) | Avg prompt tok | Avg completion tok |",
            "|---|---|---|---|---|---|---|---|---|---|"]
     for r in gen["results"]:
         off, on = r["cache_off"], r["cache_on_repeat"]
-        out.append(f"| {r['config']} | {r['faithfulness']} | {r['answer_relevance']} | {r['context_recall']} | {off['p50_ms']:.0f} ms | "
+        out.append(f"| {r['config']} | {r['faithfulness']} | {r['answer_relevance']} | {r['context_hit_rate_at_4']} | {off['p50_ms']:.0f} ms | "
                    f"{off['p95_ms']:.0f} ms | {on['p50_ms']:.2f} ms | {on['p95_ms']:.2f} ms | {off['avg_prompt_tokens']} | {off['avg_completion_tokens']} |")
     out += ["", "## Per-stage latency, cache off (median over questions)", "", "| Config | Retrieval (BM25+dense+fuse) | Rerank | LLM generate |", "|---|---|---|---|"]
     for name, rows in answers.items():

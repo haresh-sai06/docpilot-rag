@@ -10,7 +10,7 @@ DocPilot answers developer questions about the **FastAPI documentation** (MIT-li
 - **Two-level caching** in SQLite: query embeddings and full responses.
 - **Pluggable LLM**: local **Ollama** model, any **OpenAI-compatible** API, or `none` (extractive answers).
 - **FastAPI** backend plus a minimal **React (Vite)** UI, a **Dockerfile** that bakes in the index, and **Cloud Run / ECS Fargate** configs.
-- **Eval harness**: a retrieval ablation on 100 questions (Recall@k, MRR), plus a generation ablation (faithfulness, answer relevance, context recall) with latency and token cost, cache on vs off.
+- **Eval harness**: a retrieval ablation on 100 questions (Recall@k, MRR), plus a generation ablation (faithfulness, answer relevance, context hit rate@4) with latency and token cost, cache on vs off.
 
 > Every number below comes from this repo's eval scripts, run on a shared 8-vCPU CPU-only box. Raw outputs are in `reports/`. The LLM for the generation evals was **Qwen2.5-1.5B-Instruct (Q4_K_M GGUF) via Ollama**.
 
@@ -70,15 +70,15 @@ flowchart LR
 
 ### 2. Generation ablation (25-question seeded subset, end to end through the agent)
 
-| Config | Faithfulness | Answer relevance | Context recall@4 | p50, cache off | p95, cache off | p50 / p95, cache on (repeat queries) | Avg prompt / completion tokens |
+| Config | Faithfulness | Answer relevance | Context hit rate@4 (gold passage in top-4 context) | p50, cache off | p95, cache off | p50 / p95, cache on (repeat queries) | Avg prompt / completion tokens |
 |---|---|---|---|---|---|---|---|
-| Hybrid, no rerank | **0.427** | 0.904 | 0.76 | **5.6 s** | **9.7 s** | 0.1 ms / 0.1 ms | 750.9 / 64.5 |
-| Hybrid + rerank | 0.416 | **0.918** | **0.88** | 9.5 s | 87.4 s* | 0.1 ms / 0.1 ms | 758.1 / 77.9 |
+| Hybrid, no rerank | **0.427** | 0.904 | 0.76 (19/25) | **5.6 s** | **9.7 s** | 0.1 ms / 0.1 ms | 750.9 / 64.5 |
+| Hybrid + rerank | 0.416 | **0.918** | **0.88 (22/25)** | 9.5 s | 87.4 s* | 0.1 ms / 0.1 ms | 758.1 / 77.9 |
 
 How each metric is measured:
 - **Faithfulness** is the share of answer sentences entailed (P ≥ 0.5) by at least one passage the LLM saw, scored with the `cross-encoder/nli-deberta-v3-xsmall` NLI model.
 - **Answer relevance** is the cosine similarity between the bge-small embeddings of the question and the answer.
-- **Context recall@4** means the gold chunk was among the 4 passages given to the LLM.
+- **Context hit rate@4 (gold passage in top-4 context)** is the share of questions whose gold passage was among the 4 passages given to the LLM. It is a retrieval measure and says nothing about whether the generated answer was correct.
 - **Cache on** means the same 25 questions were replayed after the cold pass: 25/25 response-cache hits, 0 LLM calls.
 
 Median latency per stage with the cache off (`reports/generation_eval.md`):
@@ -91,7 +91,7 @@ Median latency per stage with the cache off (`reports/generation_eval.md`):
 \*The 87 s p95 comes from two LLM calls that stalled for 95–107 s while other jobs were competing for the box's CPU. Their retrieval and rerank stages took about 1.5 s, as usual. Treat the p95 column as noisy; the per-stage medians are the reliable comparison.
 
 **Takeaways**
-- The reranker raises **context recall from 0.76 to 0.88**, so the LLM sees the right passage more often, and answer relevance improves slightly (0.904 → 0.918).
+- The reranker raises the **context hit rate@4 (gold passage in top-4 context) from 0.76 (19/25) to 0.88 (22/25)**, so the gold passage reaches the LLM more often. This does not measure answer correctness. Answer relevance improves slightly (0.904 → 0.918).
 - Measured faithfulness did **not** improve (0.427 vs 0.416, within noise for n = 25). With a 1.5B model, the bottleneck is the generator paraphrasing beyond the context, not retrieval.
 - The response cache turns a 5.6–9.5 s median answer into a **0.1 ms** lookup for repeated questions.
 
@@ -146,7 +146,7 @@ No credentials are committed; `.env.example` only lists variable names.
 ## How to talk about this in an interview
 
 - **"Why hybrid?"** Show the table. BM25 is the strongest single retriever on this corpus, but dense retrieval finds complementary hits, so RRF fusion gets the best Recall@10 (0.97 vs 0.94 / 0.92) without tuning weights. The intuition to explain is that lexical matching catches exact API names and dense matching catches paraphrases.
-- **"Was the reranker worth it?"** Retrieval: Recall@1 0.70 → 0.79, MRR 0.796 → 0.843, context recall 0.76 → 0.88. Cost: about 1.4 s of CPU per query. Then the honest part: faithfulness didn't move with a 1.5B generator. That tells you where to invest next (generator quality), and it's exactly what ablations are for.
+- **"Was the reranker worth it?"** Retrieval: Recall@1 0.70 → 0.79, MRR 0.796 → 0.843, context hit rate@4 (gold passage in top-4 context) 0.76 → 0.88 (19/25 → 22/25), which is a retrieval number, not answer correctness. Cost: about 1.4 s of CPU per query. Then the honest part: faithfulness didn't move with a 1.5B generator. That tells you where to invest next (generator quality), and it's exactly what ablations are for.
 - **"How do you evaluate RAG without labels?"** Synthetic question generation with known source chunks gives retrieval labels for free. Name the bias it introduces (lexical overlap favours BM25) and how to fix it: hand-written or user-log questions.
 - **"How would you cut latency and cost?"** The response cache took repeats from seconds to 0.1 ms with zero tokens. Beyond that: a semantic cache, a GPU or hosted LLM for generation (the dominant stage at 5.5–6.6 s here), fewer rerank candidates, and streaming tokens to the UI.
 - **"Why LangGraph?"** It makes the control flow explicit and testable (route, retrieve, grade, rewrite, generate) instead of one opaque chain. Each node is unit-testable, and adding a tool such as code search is a new node, not a rewrite.

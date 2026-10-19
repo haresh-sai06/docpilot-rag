@@ -6,7 +6,7 @@ Generation metrics (no LLM judge needed, so they are cheap and reproducible):
                       cross-encoder (cross-encoder/nli-deberta-v3-xsmall); a sentence counts as supported
                       if P(entailment) >= 0.5 for at least one context passage
   answer_relevance  - cosine similarity between question and answer embeddings (bge-small)
-  context_recall    - gold chunk is among the passages given to the LLM
+  context_hit_rate_at_4 - gold passage is among the top-4 passages given to the LLM (retrieval measure, NOT answer correctness)
 
 python eval/run_generation_eval.py --n 25 --phase generate --configs norerank
   python eval/run_generation_eval.py --n 25 --phase generate --configs rerank
@@ -121,7 +121,7 @@ def score(s, a, tests):
         ctx = [r["gold"] in [c["chunk_id"] for c in r["citations"]] for r in cold]
         f_valid = [x for x in faith if x is not None]
         results.append({"config": raw["config"], "n": len(cold), "faithfulness": round(float(np.mean(f_valid)), 3),
-                        "answer_relevance": round(float(np.mean(rel)), 3), "context_recall": round(float(np.mean(ctx)), 3),
+                        "answer_relevance": round(float(np.mean(rel)), 3), "context_hit_rate_at_4": round(float(np.mean(ctx)), 3),
                         "cache_off": summarise(cold), "cache_on_repeat": summarise(warm)})
         answers[raw["config"]] = cold
         print(results[-1], flush=True)
