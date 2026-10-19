@@ -89,6 +89,10 @@ def main():
     cache = KVCache(s.cache_path, enabled=True)
     retriever = HybridRetriever(chunks, Embedder(s.embed_model, cache), Reranker(s.rerank_model))
     scorer = Scorer(retriever.embedder)
+    from docpilot.llm import LLM
+
+    LLM(s).chat("You are terse.", "Say OK.", max_tokens=4)  # warm-up: load the model before timing
+    retriever.search("warm up the reranker", k=4, rerank=True)
     results, raw = [], {}
     for name, rerank in [("Hybrid, no rerank", False), ("Hybrid + rerank", True)]:
         cache.clear()
