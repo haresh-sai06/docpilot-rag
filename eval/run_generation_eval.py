@@ -47,8 +47,8 @@ class Scorer:
         sents = sentences(answer)
         if not sents or not contexts:
             return None
-        pairs = [(c[:1500], s) for s in sents for c in contexts]
-        logits = np.asarray(self.nli.predict(pairs, batch_size=16))
+        pairs = [(c[:1000], s) for s in sents for c in contexts]
+        logits = np.asarray(self.nli.predict(pairs, batch_size=8))
         probs = np.exp(logits) / np.exp(logits).sum(axis=1, keepdims=True)
         ent = probs[:, self.ent].reshape(len(sents), len(contexts)).max(axis=1)
         return float((ent >= 0.5).mean())
@@ -109,6 +109,10 @@ def main():
                         "cache_off": summarise(cold), "cache_on_repeat": summarise(warm)})
         raw[name] = [{k: r[k] for k in ("id", "question", "answer", "citations", "latency_ms", "usage", "timings")} for r in cold]
         print(results[-1], flush=True)
+        save(s, a, tests, results, raw)  # write after every config so a crash loses nothing
+
+
+def save(s, a, tests, results, raw):
     meta = {"llm_provider": s.llm_provider, "llm_model": s.llm_model, "embed_model": s.embed_model, "nli_model": NLI_MODEL,
             "subset_seed": a.seed, "subset_ids": [t["id"] for t in tests], "results": results}
     (ROOT / "reports" / "generation_eval.json").write_text(json.dumps(meta, indent=2))
